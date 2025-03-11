@@ -11,7 +11,7 @@ import { Chain } from '@bsv/wallet-toolbox/out/src/sdk/types.js'
 const {
   SERVER_PRIVATE_KEY = 'f9b0f65b26f7adfc70d3819491b42506c07d8f150c55a1eb31efe3b4997edba3', // TEST PRIVATE KEY
   WALLET_STORAGE_URL = 'https://storage.babbage.systems',
-  HTTP_PORT = 3000,
+  HTTP_PORT = 8080,
   CERTIFICATE_TYPE_ID = 'AGfk/WrT1eBDXpz3mcw386Zww2HmqcIn3uY6x4Af1eo=',
   BSV_NETWORK = 'main',
   CERTIFIER_IDENTITY_KEY = '0220529dc803041a83f4357864a09c717daa24397cf2f3fc3a5745ae08d30924fd'
