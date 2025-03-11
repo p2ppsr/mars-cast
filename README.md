@@ -1,6 +1,6 @@
-# MarsCast - Real-Time Mars Weather Monetized API 🚀
+# MarsCast - Monetized Mars Weather API 🚀
 
-### Explore Martian Weather Data. Pay only for what you use. Powered by Blockchain and Verified Identity.
+### Explore Martian Weather Data. Pay only for what you use. Powered by the BSV Blockchain and Identity Certificates.
 
 MarsCast is the first-of-its-kind monetized API providing real-time weather data from Mars, uniquely combining micropayments and blockchain-based identity certificates for secure and verified access. Developers, educators, space enthusiasts, and businesses can seamlessly integrate reliable Martian climate data into their projects, paying securely and precisely for exactly what they consume.
 
@@ -18,61 +18,23 @@ MarsCast is the first-of-its-kind monetized API providing real-time weather data
 
 Integrate MarsCast API effortlessly into your apps:
 
-```javascript
-fetch('https://marscast.example/api/weather?api_key=YOUR_BLOCKCHAIN_KEY')
-  .then(response => response.json())
-  .then(data => {
-    console.log('Current Mars Weather:', data);
+```typescript
+  const wallet = new WalletClient('json-api', 'localhost')
+  // Fetch weather stats using AuthFetch
+  const response = await new AuthFetch(wallet).fetch('http://api.marscast.space/weatherStats', {
+    method: 'GET'
   })
-  .catch(error => console.error('Error:', error));
 ```
 
-### Blockchain Payments & Identity Verification
+### Micropayments & Identity Verification
 
 Every request triggers:
 
-- **Micropayment via blockchain wallet**
+- **Micropayment via BRC-100 Wallet**
 - **Verification of `Cool` Identity Certificate** (BRC-52 compliant)
 - **Selective field revelation**: only the required identity attributes are revealed, ensuring maximum user privacy.
 
-```bash
-# Example API Call with Micropayment and Identity Verification
-curl -X GET "https://marscast.example/api/weather?api_key=YOUR_BLOCKCHAIN_KEY"
-```
-
-## 💳 Pricing
-
-| API Calls Per Month | Cost per API Call (USD) |
-| ------------------- | ----------------------- |
-| First 1,000 calls   | $0.005                  |
-| 1,001 - 10,000      | $0.003                  |
-| 10,001+             | $0.001                  |
-
-_Pay as you go, transparent and straightforward._
-
-## 🛠️ Technology Stack
-
-- **NASA InSight API**: Live Mars weather data
-- **Blockchain**: Ethereum, Polygon, or your preferred chain
-- **Payments**: Cryptocurrency wallets, Smart Contracts
-- **Identity Verification**: BRC-52 compliant identity certificates
-- **Web Integration**: RESTful JSON API
-
-## 📡 Join the MarsCast Community
-
-- Stay updated on new features
-- Provide feedback and request new data endpoints
-- Collaborate on space-related data initiatives
-
-## 🌠 Why MarsCast?
-
-MarsCast isn't just another API—it's your portal to another planet. With Mars exploration gaining traction, MarsCast offers a unique, verified-access, and hype-driven angle for your apps, services, or research. Stand out, innovate, and inspire curiosity!
-
-## 🌎 [Explore More & Get Started](https://marscast.example)
-
-Explore the potential of MarsCast. Harness Martian weather data today!
-
 ---
 
-**MarsCast** - Bridging Earth and Mars, one byte at a time.
+**MarsCast** - Connecting Earthlings to Martian skies.
 
