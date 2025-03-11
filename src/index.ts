@@ -5,13 +5,16 @@ import { createPaymentMiddleware } from '@bsv/payment-express-middleware'
 import { AuthRequest, createAuthMiddleware } from '@bsv/auth-express-middleware'
 import * as crypto from 'crypto'
 import { PubKeyHex, VerifiableCertificate } from '@bsv/sdk'
+import { Chain } from '@bsv/wallet-toolbox/out/src/sdk/types.js'
 (global.self as any) = { crypto }
 
 const {
   SERVER_PRIVATE_KEY = 'f9b0f65b26f7adfc70d3819491b42506c07d8f150c55a1eb31efe3b4997edba3', // TEST PRIVATE KEY
   WALLET_STORAGE_URL = 'https://storage.babbage.systems',
   HTTP_PORT = 3000,
-  COOL_CERT_TYPE = 'AGfk/WrT1eBDXpz3mcw386Zww2HmqcIn3uY6x4Af1eo='
+  CERTIFICATE_TYPE_ID = 'AGfk/WrT1eBDXpz3mcw386Zww2HmqcIn3uY6x4Af1eo=',
+  BSV_NETWORK = 'main',
+  CERTIFIER_IDENTITY_KEY = '0220529dc803041a83f4357864a09c717daa24397cf2f3fc3a5745ae08d30924fd'
 } = process.env
 const CERTIFICATES_RECEIVED: Record<PubKeyHex, VerifiableCertificate[]> = {};
 
@@ -109,7 +112,7 @@ function mockMarsWeatherData(): MarsWeatherData {
 // -----------------------------------------------------------------------------
 
 const wallet = await Setup.createWalletClientNoEnv({
-  chain: 'main',
+  chain: BSV_NETWORK as Chain,
   rootKeyHex: SERVER_PRIVATE_KEY,
   storageUrl: WALLET_STORAGE_URL
 })
@@ -121,9 +124,9 @@ app.use(createAuthMiddleware({
   // logger: console,
   // logLevel: 'debug',
   certificatesToRequest: {
-    certifiers: ['0220529dc803041a83f4357864a09c717daa24397cf2f3fc3a5745ae08d30924fd'],
+    certifiers: [CERTIFIER_IDENTITY_KEY],
     types: {
-      [COOL_CERT_TYPE]: ['cool']
+      [CERTIFICATE_TYPE_ID]: ['cool']
     }
   },
   // Save certificates correctly when received.
@@ -160,7 +163,7 @@ app.get('/weatherStats', async (req: AuthRequest, res: Response) => {
   const certs = CERTIFICATES_RECEIVED[identityKey];
   console.log('Certificates for requester:', certs);
 
-  if (certs && certs.some(cert => cert.type === COOL_CERT_TYPE)) {
+  if (certs && certs.some(cert => cert.type === CERTIFICATE_TYPE_ID)) {
     // Return the mocked Mars weather data (cached for 10 minutes)
     // TODO: Use a real-time mars weather API instead of mocked data.
     const weatherData = getCachedMarsWeatherData()
