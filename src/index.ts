@@ -121,8 +121,8 @@ const wallet = await Setup.createWalletClientNoEnv({
 app.use(createAuthMiddleware({
   wallet,
   allowUnauthenticated: false,
-  // logger: console,
-  // logLevel: 'debug',
+  logger: console,
+  logLevel: 'debug',
   certificatesToRequest: {
     certifiers: [CERTIFIER_IDENTITY_KEY],
     types: {
