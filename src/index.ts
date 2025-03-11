@@ -8,7 +8,7 @@ import { PubKeyHex, VerifiableCertificate } from '@bsv/sdk'
 (global.self as any) = { crypto }
 
 const {
-  SERVER_PRIVATE_KEY = 'f9b0f65b26f7adfc70d3819491b42506c07d8f150c55a1eb31efe3b4997edba3',
+  SERVER_PRIVATE_KEY = 'f9b0f65b26f7adfc70d3819491b42506c07d8f150c55a1eb31efe3b4997edba3', // TEST PRIVATE KEY
   WALLET_STORAGE_URL = 'https://storage.babbage.systems',
   HTTP_PORT = 3000,
   COOL_CERT_TYPE = 'AGfk/WrT1eBDXpz3mcw386Zww2HmqcIn3uY6x4Af1eo='
