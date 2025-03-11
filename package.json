@@ -1,0 +1,28 @@
+{
+  "name": "marscast",
+  "version": "1.0.0",
+  "description": "Mars Weather API Tutorial",
+  "main": "./out/src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc; node --max-http-header-size=65536 out/src/index.js",
+    "build": "tsc",
+    "lint": "standard --fix ."
+  },
+  "keywords": [],
+  "author": "P2PPSR",
+  "license": "Open BSV License",
+  "dependencies": {
+    "@bsv/payment-express-middleware": "^1.0.3",
+    "@bsv/sdk": "^1.3.35",
+    "@bsv/wallet-toolbox": "^1.1.58",
+    "auth-express-middleware": "^1.0.0",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/express": "^5.0.0"
+  }
+}
