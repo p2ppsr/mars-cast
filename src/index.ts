@@ -162,6 +162,7 @@ app.get('/weatherStats', async (req: AuthRequest, res: Response) => {
 
   if (certs && certs.some(cert => cert.type === COOL_CERT_TYPE)) {
     // Return the mocked Mars weather data (cached for 10 minutes)
+    // TODO: Use a real-time mars weather API instead of mocked data.
     const weatherData = getCachedMarsWeatherData()
     res.json(weatherData)
     return
