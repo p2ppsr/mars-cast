@@ -12,7 +12,7 @@
   "author": "P2PPSR",
   "license": "Open BSV License",
   "dependencies": {
-    "@bsv/auth-express-middleware": "^1.0.12",
+    "@bsv/auth-express-middleware": "^1.0.13",
     "@bsv/payment-express-middleware": "^1.0.3",
     "@bsv/sdk": "^1.4.0",
     "@bsv/wallet-toolbox": "^1.1.58",
