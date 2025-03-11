@@ -2,8 +2,8 @@
   "name": "marscast",
   "version": "1.0.0",
   "description": "Mars Weather API Tutorial",
-  "main": "./out/src/index.js",
   "type": "module",
+  "main": "out/index.js",
   "scripts": {
     "start": "tsc; node --max-http-header-size=65536 out/src/index.js",
     "build": "tsc",

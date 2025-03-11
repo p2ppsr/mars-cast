@@ -1,38 +1,21 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "ESNext"
-    ],
-    "module": "NodeNext",
-    "target": "esnext",
-    "moduleResolution": "NodeNext",
-    "moduleDetection": "force",
-    "rootDir": "./",
-    "baseUrl": "./",
-    "outDir": "./out",
+    "target": "ES2022",
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "out",
     "strict": true,
-    "isolatedModules": true,
-    "strictNullChecks": true,
-    "downlevelIteration": false,
-    "skipLibCheck": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true
+    "skipLibCheck": true,
+    "allowJs": true
   },
-  "files": [
-    "src/index.ts",
-  ],
   "include": [
-    "src",
-    "knexfile.ts",
+    "src"
   ],
   "exclude": [
-    "dist",
-    "*/**/__tests"
+    "node_modules",
+    "out",
+    "**/*.test.ts"
   ]
 }
