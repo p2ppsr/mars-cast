@@ -8,7 +8,7 @@ document.getElementById('fetch-weather-button').addEventListener('click', async 
     const client = new AuthFetch(wallet)
 
     // Fetch weather stats using AuthFetch.
-    const response = await client.fetch('http://localhost:3000/weatherStats', {
+    const response = await client.fetch('http://localhost:8080/weatherStats', {
       method: 'GET'
     })
     const data = await response.json()
