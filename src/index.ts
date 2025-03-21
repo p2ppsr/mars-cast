@@ -162,8 +162,8 @@ async function init() {
   app.get('/weatherStats', async (req: AuthRequest, res: Response) => {
     const identityKey = req.auth?.identityKey || ''
     const certs = CERTIFICATES_RECEIVED[identityKey]
-    console.log('Certificates for requester:', certs)
-
+    console.log('Certificates from requester:', certs)
+    debugger
     if (certs && certs.some(cert => cert.type === CERTIFICATE_TYPE_ID)) {
       // Return the mocked Mars weather data (cached for 10 minutes)
       // TODO: Use a real-time mars weather API instead of mocked data.
