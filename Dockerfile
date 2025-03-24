@@ -31,4 +31,4 @@ RUN npm ci --production
 EXPOSE 8080
 
 # Start command
-CMD ["node", "out/index.js"]
+CMD ["node", "--max-http-header-size=32768", "out/index.js"]
