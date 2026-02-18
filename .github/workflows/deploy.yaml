@@ -27,14 +27,27 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Push Docker Image to GCR
-        uses: RafikFarhad/push-to-gcr-github-action@v4.1
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          gcloud_service_key: ${{ secrets.DOCKER_REGISTRY_PUSH_KEY }}
-          registry: ${{ env.GCR_HOST }}
-          project_id: ${{ env.GOOGLE_PROJECT_ID }}
-          image_name: ${{ env.GCR_IMAGE_NAME }}
-          image_tag: latest,${{ env.CURRENT_BRANCH }}-${{ github.sha }}
+          credentials_json: ${{ secrets.gcp_deploy_creds }}
+
+      - name: Setup gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker Auth for GCR
+        run: gcloud auth configure-docker ${{ env.GCR_HOST }} --quiet
+
+      - name: Build and Push Docker Image to GCR
+        run: |
+          IMAGE_BASE="${{ env.GCR_HOST }}/${{ env.GOOGLE_PROJECT_ID }}/${{ env.GCR_IMAGE_NAME }}"
+          IMAGE_SHA_TAG="${{ env.CURRENT_BRANCH }}-${{ github.sha }}"
+          docker build \
+            -t "${IMAGE_BASE}:latest" \
+            -t "${IMAGE_BASE}:${IMAGE_SHA_TAG}" \
+            .
+          docker push "${IMAGE_BASE}:latest"
+          docker push "${IMAGE_BASE}:${IMAGE_SHA_TAG}"
 
       - name: Create Service Description File
         run: ./scripts/mkenv.sh service.${{ env.CURRENT_BRANCH }}.yaml
@@ -47,11 +60,6 @@ jobs:
           WALLET_STORAGE_URL: ${{ env.CURRENT_BRANCH == 'production' && secrets.PROD_WALLET_STORAGE_URL || secrets.STAGING_WALLET_STORAGE_URL }}
           CERTIFIER_IDENTITY_KEY: ${{ env.CURRENT_BRANCH == 'production' && secrets.PROD_CERTIFIER_IDENTITY_KEY || secrets.STAGING_CERTIFIER_IDENTITY_KEY }}
           CERTIFICATE_TYPE_ID: 'AGfk/WrT1eBDXpz3mcw386Zww2HmqcIn3uY6x4Af1eo='
-
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.gcp_deploy_creds }}
 
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v1
