@@ -38,6 +38,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // Serve static files from the 'public' directory.
 app.use(express.static('public'))
 
+app.get('/healthz', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok' })
+})
+
 // -----------------------------------------------------------------------------
 // MOCKED MARS WEATHER DATA WITH CACHING
 // -----------------------------------------------------------------------------

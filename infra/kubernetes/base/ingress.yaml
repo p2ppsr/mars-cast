@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: marscast
+  labels:
+    app.kubernetes.io/name: marscast
+    app.kubernetes.io/component: ingress
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: []
+      secretName: marscast-tls
+  rules: []
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: marscast-tls
+  labels:
+    app.kubernetes.io/name: marscast
+    app.kubernetes.io/component: tls
+spec:
+  secretName: marscast-tls
+  dnsNames: []
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-nginx

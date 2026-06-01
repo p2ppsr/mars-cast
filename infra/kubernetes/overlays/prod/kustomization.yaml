@@ -1,0 +1,44 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: marscast-prod
+
+resources:
+  - namespace.yaml
+  - ../../base
+
+images:
+  - name: marscast
+    newName: registry.cars-operator-system.svc.cluster.local:5000/p2ppsr/marscast
+    newTag: local
+
+patches:
+  - target:
+      kind: Ingress
+      name: marscast
+    patch: |-
+      - op: replace
+        path: /spec/tls/0/hosts
+        value:
+          - marscast-backend.babbage.systems
+      - op: replace
+        path: /spec/rules
+        value:
+          - host: marscast-backend.babbage.systems
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: marscast
+                      port:
+                        number: 8080
+  - target:
+      kind: Certificate
+      name: marscast-tls
+    patch: |-
+      - op: replace
+        path: /spec/dnsNames
+        value:
+          - marscast-backend.babbage.systems
