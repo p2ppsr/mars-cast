@@ -22,6 +22,7 @@ WORKDIR /app
 
 # Copy the build output from the builder
 COPY --from=builder /app/out ./out
+COPY --from=builder /app/public ./public
 
 # Copy only the production dependencies
 COPY package*.json ./
