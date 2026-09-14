@@ -14,27 +14,6 @@ images:
 
 patches:
   - target:
-      kind: Ingress
-      name: marscast
-    patch: |-
-      - op: replace
-        path: /spec/tls/0/hosts
-        value:
-          - marscast-backend.babbage.systems
-      - op: replace
-        path: /spec/rules
-        value:
-          - host: marscast-backend.babbage.systems
-            http:
-              paths:
-                - path: /
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: marscast
-                      port:
-                        number: 8080
-  - target:
       kind: Certificate
       name: marscast-tls
     patch: |-

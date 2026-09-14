@@ -9,5 +9,5 @@ data:
   NODE_ENV: "production"
   BSV_NETWORK: "main"
   HTTP_PORT: "8080"
-  WALLET_STORAGE_URL: "http://wallet-storage.wallet-storage-prod.svc.cluster.local:8080"
+  WALLET_STORAGE_URL: "https://storage.babbage.systems"
   CERTIFICATE_TYPE_ID: "AGfk/WrT1eBDXpz3mcw386Zww2HmqcIn3uY6x4Af1eo="
