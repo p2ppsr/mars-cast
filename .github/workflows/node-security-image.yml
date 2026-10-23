@@ -1,0 +1,23 @@
+name: Node security image qualification
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dockerfile: Dockerfile
+            context: .
+            version: 22.23.4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the owning Linux recipe
+        run: docker build --pull -f "${{ matrix.dockerfile }}" -t node-security-ci "${{ matrix.context }}"
+      - name: Verify the final native interpreter
+        run: test "$(docker run --rm --network none --entrypoint node node-security-ci --version)" = "v${{ matrix.version }}"
